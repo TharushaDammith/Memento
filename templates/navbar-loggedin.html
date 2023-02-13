@@ -1,0 +1,51 @@
+<nav class="navbar">
+    <a class="nav-brand" href="{{ url_for('home') }}">Memento</a>
+
+    <ul class="user-list">
+        <li class="nav-item">
+            <a class="nav-link create hide-in-mobile non-draggable" href="#">Create</a>
+        </li>
+
+        <li class="nav-item dark mode item-margin-desktop">
+            <img class="mode non-draggable"  src="{{ url_for('static', filename='icons/dark-mode.png') }}">
+        </li>
+
+        <li class="nav-item light mode item-margin-desktop">
+            <img class="mode non-draggable" src="{{ url_for('static', filename='icons/light-mode.png') }}">
+        </li>
+
+        <li class="nav-item drop-down item-margin-mobile">
+            <div class="user-menu">AN</div>
+            <ul class="menu-data">
+                <li class="menu-item">
+                    <a class="menu-link" href="#">Dashboard</a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="#">Calender</a>
+                </li>
+                <li class="menu-item">
+                    <a class="menu-link" href="#">Settings</a>
+                </li>
+                <li class="hr-margin"><hr class="menu-hr"></li>
+                <li class="menu-item">
+                    <a class="menu-link" href="#">Log out</a>
+                </li>
+
+            </ul>
+        </li>
+
+        <li class="nav-item">
+            <div class="menu show-in-mobile">
+                <hr class="menu-line">
+                <hr class="menu-line menu-line-margin">
+                <hr class="menu-line">
+            </div>
+        </li>
+    </ul>
+
+    <ul class="nav-list">
+        <li class="create-box">
+            <a class="create non-draggable" href="#">Create</a>
+        </li>
+    </ul>
+</nav>

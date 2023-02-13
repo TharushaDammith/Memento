@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include "header.html" %}
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-initial.css') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    </head>
+    <body>
+        {% include "navbar-initial.html" %}
+
+        <section id="Authentication">
+            <div class="bg-sqr">
+                <div class="square sqr1"></div>
+                <div class="square sqr2"></div>
+                <div class="square sqr3"></div>
+                <div class="square sqr4"></div>
+                <div class="square sqr5"></div>
+                <div class="square sqr6"></div>
+                <div class="square sqr7"></div>
+                <div class="square sqr8"></div>
+                <div class="square sqr9"></div>
+                <div class="square sqr10"></div>
+                <div class="square sqr11"></div>
+            </div>
+
+            <form class="auth-box">
+                <p class="auth-title">Sign Up</p>
+
+                <label class="auth-label">Name</label>
+                <div class="input-box">
+                    <input class="auth-input" type="text" placeholder="Frank Castle">
+                </div>
+
+                <label class="auth-label">Email</label>
+                <div class="input-box">
+                    <input class="auth-input" type="email" placeholder="frankcastle@punisher.r">
+                </div>
+
+                <label class="auth-label">Password</label>
+                <div class="input-box">
+                    <input class="auth-input password" type="password">
+                    <i class="bi bi-eye-fill"></i>
+                    <i class="bi bi-eye-slash-fill"></i>
+                </div>
+
+                <button class="auth-btn" type="submit">Sign Up</button>
+            </form>
+        </section>
+
+        <footer>
+            {% include "footer.html" %}
+
+            <!--Auth js-->
+            <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+
+            <!--Navbar js-->
+            <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+        </footer>
+    </body>
+</html>
