@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include "header.html" %}
+
+        <!--Settings css-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
+
+        <!--navbar-loggedin is the navigation bar of the user IS logged in-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-loggedin.css') }}">
+
+        <!--navbar-initial is the navigation bar if the user ISN'T logged in-->
+<!--        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-initial.css') }}">-->
+    </head>
+    <body>
+<!--        {% include "navbar-initial.html" %}-->
+        {% include "navbar-loggedin.html" %}
+
+        <section id="Settings">
+            <div class="settings-nav">
+                <p class="title">Settings</p>
+                <ul class="sub-list">
+                    <li class="sub-item">
+                        <p class="sub-title active">Personal info</p>
+                    </li>
+
+                    <li class="sub-item sub-margin">
+                        <p class="sub-title">General settings</p>
+                    </li>
+
+                    <li class="sub-item">
+                        <p class="sub-title">Delete account</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            {% include "footer.html" %}
+
+            <!--Navbar js-->
+            <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+
+            <!--Navbar dropdown js-->
+            <script src="{{ url_for('static', filename='js/navbar-loggedin.js') }}"></script>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+#Notes {
+    padding: 1.5rem 1rem;
+}
+
+.note-img {
+    background: url('/static/images/bridge.jpg');
+    background-position: 0 40%;
+    background-size: cover;
+    border-radius: 12px;
+    height: 22rem;
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.note-options {
+    align-items: center;
+    display: flex;
+    justify-content: end;
+}
+
+.note-txt {
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.email-txt {
+    border-bottom: 2px solid black;
+    cursor: pointer;
+}
+
+.email-clicked {
+    border-bottom: 2px solid blue !important;
+    color: blue;
+}
+
+.email-btn {
+    display: none;
+}
+
+.date {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: .7rem;
+    padding: .5rem 1rem;
+}
+.date-red {
+    background-color: rgb(238, 87, 87);
+}
+.date-green {
+    background-color: rgb(113, 191, 135);
+}
+.date-yellow {
+    background-color: rgb(238, 223, 87);
+}
+
+.option-margin {
+    margin: 0 1.5rem;
+}
+
+.correct {
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.clicked {
+    display: none;
+}
+
+.file-options {
+    height: 2.1rem;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.file-btn {
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    font-family: "Nunito";
+    position: absolute;
+}
+
+.save {
+    background-color: rgb(33, 133, 213);
+    padding: .7rem 2.5rem;
+    right: 0;
+}
+.save:active {
+    background-color: rgb(26, 106, 170);
+}
+
+.delete {
+    background-color: rgb(236, 53, 53);
+    padding: .7rem 2.15rem;
+}
+.delete:active {
+    background-color: rgb(132, 12, 12);
+}
+
+.dark-mode {
+    background-color: rgb(48, 56, 65);
+    color: white;
+}
+
+.border-white {
+    border-bottom: 1px solid white;
+}
+
+@media (max-width: 600px) {
+    .note-options {
+        justify-content: center;
+    }
+}
