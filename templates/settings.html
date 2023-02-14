@@ -17,26 +17,117 @@
         {% include "navbar-loggedin.html" %}
 
         <section id="Settings">
+        <form>
             <div class="settings-nav">
                 <p class="title">Settings</p>
                 <ul class="sub-list">
                     <li class="sub-item">
-                        <p class="sub-title active">Personal info</p>
+                        <p class="sub-title border">Personal info</p>
                     </li>
 
                     <li class="sub-item sub-margin">
-                        <p class="sub-title">General settings</p>
+                        <p class="sub-title border">General settings</p>
                     </li>
 
                     <li class="sub-item">
-                        <p class="sub-title">Delete account</p>
+                        <p class="sub-title border">Delete account</p>
                     </li>
                 </ul>
             </div>
+
+            <div class="user-details">
+                <div class="sub-title-box">
+                    <p class="sub-title border">Personal info</p>
+                </div>
+                <div class="user-item">
+                    <label class="user-label">Name</label>
+                    <input class="user-input border" type="text" value="Frank Castle">
+                </div>
+
+                <div class="user-item right-item">
+                    <div class="error-box">
+                        <label class="user-label email">Email</label>
+                        <p class="error">*Verify Email</p>
+                    </div>
+                    <input class="user-input input-error border" type="email" value="frank@castle.r">
+                </div>
+
+                <div class="user-item">
+                    <label class="user-label">Password</label>
+                    <div class="password-box">
+                        <input class="user-input password-input password border" type="password">
+                        <i class="bi bi-eye-fill eye-pass"></i>
+                        <i class="bi bi-eye-slash-fill eye-slash-pass"></i>
+                    </div>
+                </div>
+
+                <div class="user-item right-item">
+                    <div class="error-box">
+                        <label class="user-label">Confirm password</label>
+                        <p class="error">*Passwords don't match</p>
+                    </div>
+                    <div class="password-box">
+                        <input class="user-input password-input confirm-password input-error border" type="password">
+                        <i class="bi bi-eye-fill eye-confirm"></i>
+                        <i class="bi bi-eye-slash-fill eye-slash-confirm"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-details">
+                <div class="sub-title-box">
+                    <p class="sub-title border">General settings</p>
+                </div>
+
+                <div class="user-item">
+                    <div class="row-box">
+                        <p class="user-label">Theme</p>
+                        <div class="theme light-theme">Light</div>
+                        <div class="theme dark-theme">Dark</div>
+                    </div>
+
+                    <div class="row-box">
+                        <p class="user-label disable">Email Alert</p>
+                        <input class="checkbox" type="checkbox" disabled>
+                    </div>
+                </div>
+
+                <div class="user-item">
+                    <div class="task-box">
+                        <div class="error-box">
+                            <p class="user-label">Task status (days left)</p>
+                            <p class="error">*Enter a number</p>
+                        </div>
+                        <div class="task-status">
+                            <div class="status-box">
+                                <div class="status red"></div><input class="user-input date-limit border" type="text">
+                            </div>
+
+                            <div class="status-box">
+                                <div class="status yellow"></div><input class="user-input date-limit border" type="text">
+                            </div>
+
+                            <div class="status-box">
+                                <div class="status green"></div><input class="user-input date-limit border" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="file-options">
+                <div class="file-btn delete">Delete account</div>
+                <button class="file-btn delete-btn" type="submit">Delete account</button>
+                <button class="file-btn save" type="submit">Save changes</button>
+            </div>
+        </form>
         </section>
 
         <footer>
             {% include "footer.html" %}
+
+            <!--Settings js-->
+            <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
 
             <!--Navbar js-->
             <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
