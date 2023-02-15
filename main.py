@@ -27,7 +27,7 @@ def sign_up():
 
 @app.route("/dashboard")
 def dashboard():
-    return "dashboard"
+    return render_template("dashboard.html")
 
 
 @app.route("/settings")

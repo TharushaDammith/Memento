@@ -1,0 +1,309 @@
+#Dashboard {
+    display: flex;
+    position: relative;
+}
+
+textarea {
+    color: rgba(58, 71, 80, .8);
+}
+
+.side-nav {
+    background-color: rgb(217, 217, 217);
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    transition: width 1s;
+    width: 0;
+    z-index: 50;
+}
+.open-side-nav {
+    width: 15rem;
+}
+
+.side-menu {
+    cursor: pointer;
+    left: 1rem;
+    position: absolute;
+    top: 1rem;
+    transition: left .8s;
+    width: 2rem;
+    z-index: 51;
+}
+.side-menu-on {
+    left: 12rem;
+}
+
+.side-line {
+    border: 1px solid black;
+    margin: .2rem 0;
+}
+
+.side-list {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    left: calc(7rem - 46.5px);
+    margin-top: 3rem;
+    position: absolute;
+    width: fit-content;
+}
+
+.side-item {
+    margin-bottom: 1rem;
+}
+
+.side-link {
+    color: black;
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 400;
+}
+
+.active {
+    font-weight: 600;
+}
+
+.cache-btn {
+    background-color: rgb(79, 97, 110);
+    border-radius: 7px;
+    cursor: pointer;
+    padding: .5rem 1.5rem;
+}
+
+.cache-link {
+    color: white !important;
+}
+
+.username-box {
+    align-items: center;
+    background-color: rgba(58, 71, 80, .5);
+    bottom: 0;
+    color: white;
+    display: flex;
+    font-family: "Montserrat Alternates", sans-serif;
+    font-size: .8rem;
+    justify-content: center;
+    left: 0;
+    padding: 1rem 0;
+    position: absolute;
+    width: 100%;
+}
+
+.username {
+    position: absolute;
+    white-space: nowrap;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 3rem 2rem 2rem;
+    width: 100%;
+}
+
+.note {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgb(217, 217, 217);
+    height: 20rem;
+    margin-bottom: 2rem;
+    width: 32%;
+}
+
+.note-height {
+    height: 50%;
+}
+
+.note-img {
+    background: url('/static/images/bridge.jpg');
+    background-size: cover;
+    background-position: 0 50%;
+    border-radius: 10px 10px 0 0;
+}
+
+.note-info {
+    align-items: center;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    text-align: justify;
+}
+
+.note-description {
+    background-color: transparent;
+    border: none;
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    height: calc(100% - 4rem);
+    outline: none;
+    position: absolute;
+    resize: none;
+    text-align: justify;
+    top: .5rem;
+    width: 95%;
+}
+
+.note-options {
+    align-items: center;
+    bottom: 1rem;
+    display: flex;
+    position: absolute;
+    width: 95%;
+}
+
+.date {
+    align-items: center;
+    background-color: rgb(113, 191, 135);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    font-size: .7rem;
+    height: 1.5rem;
+    justify-content: center;
+    width: 5.2rem;
+}
+
+.checkmark {
+    cursor: pointer;
+    height: 2.2rem;
+    position: absolute;
+    right: 0;
+}
+
+@media (max-width: 850px) {
+    .content {
+        padding: 3rem 1rem 2rem;
+    }
+
+    .note {
+        width: 48%;
+    }
+}
+
+@media (max-width: 600px) {
+    .note {
+        width: 100%;
+    }
+
+    .open-side-nav {
+        width: 100%;
+    }
+
+    .side-menu-on {
+        left: calc(100% - 3rem);
+    }
+
+    .side-list {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+form {
+    position: relative;
+}
+
+.cache-box {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, .25);
+    display: none;
+    height: 25rem;
+    left: 50%;
+    position: absolute;
+    top: 8rem;
+    transform: translateX(-50%);
+    width: 18rem;
+    z-index: 100;
+}
+.cache-box-on {
+    display: block;
+}
+
+.minimize {
+    border: 1px solid black;
+    border-radius: 1rem;
+    width: 1.5rem;
+}
+
+.minimize-cursor {
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: .5rem;
+    width: fit-content;
+}
+
+.cache-input {
+    background-color: transparent;
+    border: none;
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    height: 20rem;
+    margin-top: 3rem;
+    outline: none;
+    padding: 0 .5rem;
+    resize: none;
+    text-align: justify;
+    width: calc(100% - 1rem);
+}
+
+@media (max-width: 600px) {
+    .cache-box {
+        display: none;
+    }
+}
+
+.save {
+    background-color: rgb(33, 133, 213);
+    border: none;
+    border-radius: 8px;
+    bottom: 1rem;
+    color: white;
+    cursor: pointer;
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    padding: .6rem 2rem;
+    position: absolute;
+    right: 2rem;
+    transition: right 1s, bottom 1s;
+}
+.save:active {
+    background-color: rgb(26, 106, 170);
+}
+
+@media (max-width: 850px) {
+    .save {
+        bottom: .7rem;
+        right: 1rem;
+    }
+}
+
+/* Dark mode */
+
+.dark-bg {
+    background-color: rgb(48, 56, 65);
+}
+
+.dark-box {
+    background-color: rgb(58, 71, 80);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    color: white !important;
+}
+
+.dark-username {
+    background-color: rgba(217, 217, 217, .5);
+}
+
+.dark-side-nav {
+    background-color: rgb(70, 81, 94);
+}
+
+.color-white {
+    color: rgba(255, 255, 255, .8);
+}
+
+.border-white {
+    border: 1px solid white !important;
+}
