@@ -5,98 +5,123 @@
 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
+        <!--Navbar css-->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-loggedin.css') }}">
     </head>
     <body>
         {% include "navbar-loggedin.html" %}
 
-        <form>
         <section id="Dashboard">
-            <div class="side-menu">
-                <hr class="side-line">
-                <hr class="side-line">
+            <div class="note">
+                <div class="note-img">
+                    <div class="note-menu" onclick="OpenMenu(this)"><div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row middle-dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div></div>
+                    <ul class="note-list">
+                        <li class="note-item note-link">
+                            <p class="item-text">Open</p>
+                        </li>
+                        <li class="note-item note-delete" onclick="DeleteMenu(this)">
+                            <p class="item-text">Delete</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="note-content">
+                    <textarea class="note-text" autofocus>Write here...</textarea>
+                    <div class="note-options">
+                        <div class="date">02-02-2023</div>
+                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}">
+                    </div>
+                </div>
             </div>
-            <div class="side-nav">
-                <ul class="side-list">
-                    <li class="side-item">
-                        <a class="side-link">Settings</a>
-                    </li>
 
-                    <li class="side-item">
-                        <a class="side-link">Calender</a>
-                    </li>
-
-                    <li class="side-item">
-                        <a class="side-link active">Dashboard</a>
-                    </li>
-
-                    <li class="side-item cache-btn">
-                        <a class="side-link cache-link">Cache</a>
-                    </li>
-                </ul>
-                <div class="username-box">
-                    <p class="username">Frank Castle</p>
+            <div class="note">
+                <div class="note-img">
+                    <div class="note-menu" onclick="OpenMenu(this)">                        <div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row middle-dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div></div>
+                </div>
+                    <ul class="note-list">
+                        <li class="note-item note-link">
+                            <p class="item-text">Open</p>
+                        </li>
+                        <li class="note-item note-delete" onclick="DeleteMenu(this)">
+                            <p class="item-text">Delete</p>
+                        </li>
+                    </ul>
+                <div class="note-content">
+                    <textarea class="note-text" autofocus>Write here...</textarea>
+                    <div class="note-options">
+                        <div class="date">02-02-2023</div>
+                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}">
+                    </div>
                 </div>
             </div>
 
-            <div class="content">
-                <div class="note">
-                    <div class="note-height note-img"></div>
-                    <div class="note-height note-info">
-                        <textarea autofocus class="note-description" placeholder="Write in here..."></textarea>
-                        <div class="note-options">
-                            <div class="date">02-02-2023</div>
-                            <img class="checkmark" src="{{ url_for('static', filename='images/correct.png') }}">
+            <div class="note">
+                <div class="note-img">
+                    <div class="note-menu" onclick="OpenMenu(this)"><div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
                         </div>
-                    </div>
+                        <div class="dot-row middle-dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div></div>
+                    <ul class="note-list">
+                        <li class="note-item note-link">
+                            <p class="item-text">Open</p>
+                        </li>
+                        <li class="note-item note-delete" onclick="DeleteMenu(this)">
+                            <p class="item-text">Delete</p>
+                        </li>
+                    </ul>
                 </div>
-
-                <div class="note">
-                    <div class="note-height note-img"></div>
-                    <div class="note-height note-info">
-                        <textarea class="note-description" placeholder="Write in here..."></textarea>
-                        <div class="note-options">
-                            <div class="date">02-02-2023</div>
-                            <img class="checkmark" src="{{ url_for('static', filename='images/correct.png') }}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-height note-img"></div>
-                    <div class="note-height note-info">
-                        <textarea class="note-description" placeholder="Write in here..."></textarea>
-                        <div class="note-options">
-                            <div class="date">02-02-2023</div>
-                            <img class="checkmark" src="{{ url_for('static', filename='images/correct.png') }}">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="note">
-                    <div class="note-height note-img"></div>
-                    <div class="note-height note-info">
-                        <textarea class="note-description" placeholder="Write in here..."></textarea>
-                        <div class="note-options">
-                            <div class="date">02-02-2023</div>
-                            <img class="checkmark" src="{{ url_for('static', filename='images/correct.png') }}">
-                        </div>
+                <div class="note-content">
+                    <textarea class="note-text" autofocus>Write here...</textarea>
+                    <div class="note-options">
+                        <div class="date">02-02-2023</div>
+                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}">
                     </div>
                 </div>
             </div>
         </section>
-        <div class="cache-box">
-            <div class="minimize-cursor">
-                <hr class="minimize">
-            </div>
-            <textarea class="cache-input" placeholder="Cache gets deleted when the browser closes."></textarea>
-        </div>
-        <button class="save">Save</button>
-        </form>
 
         <footer>
             {% include "footer.html" %}
 
+            <!--Dashboard js-->
             <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 
             <!--Navbar js-->
