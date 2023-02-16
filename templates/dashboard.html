@@ -11,7 +11,7 @@
     <body>
         {% include "navbar-loggedin.html" %}
 
-        <section id="Dashboard">
+        <section id="Dashboard" class="const-height">
             <div class="note">
                 <div class="note-img">
                     <div class="note-menu" onclick="OpenMenu(this)"><div class="dot-row">
@@ -42,7 +42,7 @@
                     <textarea class="note-text" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date">02-02-2023</div>
-                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}">
+                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
                     </div>
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     <textarea class="note-text" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date">02-02-2023</div>
-                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}">
+                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                     <textarea class="note-text" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date">02-02-2023</div>
-                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}">
+                        <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
                     </div>
                 </div>
             </div>

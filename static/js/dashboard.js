@@ -38,13 +38,7 @@ function createElement() {
     dashboard = document.querySelector('#Dashboard');
     dashboard.insertAdjacentHTML('beforeend', note_boiler);
 
-    note_list = document.querySelectorAll('.note');
-    if (note_list.length >= 4) {
-        dashboard.style.height = "initial";
-    }
-    else {
-        dashboard.style.height = "calc(100vh - 91px - 6rem)";
-    }
+    FixHeight();
 }
 
 var create_btn = document.querySelectorAll('.create');
@@ -78,7 +72,53 @@ function DeleteMenu(elem) {
         }
     }
 
-    if ((note_all.length <= 4) && (window.clientHeight > 850)) {
-        dashboard.style.height = "calc(100vh - 91px - 6rem)";
+    FixHeight();
+}
+
+
+// CHECKMARK
+
+function MarkAsChecked(elem) {
+    if (elem.src.split('/').at(-1) == 'correct.png') {
+        elem.src = "static/icons/correct-clicked.png";
+    }
+    else {
+        elem.src = 'static/icons/correct.png';
+    }
+}
+
+
+
+// DASHBOARD HEIGHT
+
+function FixHeight() {
+    dashboard = document.querySelector('#Dashboard').style;
+    note_length = document.querySelectorAll('.note').length;
+
+    if (window.innerWidth > 850) {
+        if (note_length >= 4) {
+            dashboard.height = 'initial';
+        }
+        else {
+            dashboard.height = 'calc(100vh - 91px - 6rem)';
+        }
+    }
+    else if (window.innerWidth < 600) {
+        if (note_length >= 2) {
+            dashboard.height = "initial";
+        }
+        else {
+            dashboard.height = 'calc(100vh - 91px - 6rem)';
+        }
+    }
+    else {
+        console.log(1);
+        if (note_length >= 3) {
+            dashboard.height = "initial";
+        }
+        else {
+            console.log(2);
+            dashboard.height = 'calc(100vh - 91px - 6rem)';
+        }
     }
 }
