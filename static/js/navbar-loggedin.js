@@ -29,3 +29,11 @@ light_mode.addEventListener('click', () => {
     light_mode.style.display = 'none';
     dark_mode.style.display = "block";
 })
+
+
+
+// Redirect
+
+function RedirectTo(page) {
+    window.location.replace(page);
+}

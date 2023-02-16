@@ -40,5 +40,15 @@ def notes():
     return render_template("notes.html")
 
 
+@app.route("/calender")
+def calender():
+    return "calender"
+
+
+@app.route("/log_out")
+def log_out():
+    return "Log out"
+
+
 if __name__ == "__main__":
     app.run(debug=True)

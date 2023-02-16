@@ -12,6 +12,27 @@
         {% include "navbar-loggedin.html" %}
 
         <section id="Dashboard" class="const-height">
+            <div class="side-menu" onclick="Sidebar()">
+                <hr class="side-hr">
+                <hr class="side-hr">
+            </div>
+
+            <div class="sidebar">
+                <ul class="side-list">
+                    <li class="side-item">
+                        <a class="side-link txt" href="{{ url_for('settings') }}">Settings</a>
+                    </li>
+                    <li class="side-item">
+                        <a class="side-link txt">Calender</a>
+                    </li>
+                    <li class="side-item">
+                        <a class="side-link active txt" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="side-item cache-link txt" onclick="ShowCacheBox()">Cache</li>
+                </ul>
+                <p class="username">Frank Castle</p>
+            </div>
+
             <div class="note">
                 <div class="note-img">
                     <div class="note-menu" onclick="OpenMenu(this)"><div class="dot-row">
@@ -30,16 +51,16 @@
                             <div class="dot"></div>
                         </div></div>
                     <ul class="note-list">
-                        <li class="note-item note-link">
-                            <p class="item-text">Open</p>
+                        <li class="note-item note-link box" onclick="RedirectToNote()">
+                            <p class="item-text txt">Open</p>
                         </li>
-                        <li class="note-item note-delete" onclick="DeleteMenu(this)">
-                            <p class="item-text">Delete</p>
+                        <li class="note-item note-delete box" onclick="DeleteMenu(this)">
+                            <p class="item-text txt">Delete</p>
                         </li>
                     </ul>
                 </div>
-                <div class="note-content">
-                    <textarea class="note-text" autofocus>Write here...</textarea>
+                <div class="note-content box">
+                    <textarea class="note-text txt" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date">02-02-2023</div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
@@ -66,15 +87,15 @@
                         </div></div>
                 </div>
                     <ul class="note-list">
-                        <li class="note-item note-link">
-                            <p class="item-text">Open</p>
+                        <li class="note-item note-link box" onclick="RedirectToNote()">
+                            <p class="item-text txt">Open</p>
                         </li>
-                        <li class="note-item note-delete" onclick="DeleteMenu(this)">
-                            <p class="item-text">Delete</p>
+                        <li class="note-item note-delete box" onclick="DeleteMenu(this)">
+                            <p class="item-text txt">Delete</p>
                         </li>
                     </ul>
-                <div class="note-content">
-                    <textarea class="note-text" autofocus>Write here...</textarea>
+                <div class="note-content box">
+                    <textarea class="note-text txt" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date">02-02-2023</div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
@@ -100,26 +121,36 @@
                             <div class="dot"></div>
                         </div></div>
                     <ul class="note-list">
-                        <li class="note-item note-link">
-                            <p class="item-text">Open</p>
+                        <li class="note-item note-link box" onclick="RedirectToNote()">
+                            <p class="item-text txt">Open</p>
                         </li>
-                        <li class="note-item note-delete" onclick="DeleteMenu(this)">
-                            <p class="item-text">Delete</p>
+                        <li class="note-item note-delete box" onclick="DeleteMenu(this)">
+                            <p class="item-text txt">Delete</p>
                         </li>
                     </ul>
                 </div>
-                <div class="note-content">
-                    <textarea class="note-text" autofocus>Write here...</textarea>
+                <div class="note-content box">
+                    <textarea class="note-text txt" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date">02-02-2023</div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
                     </div>
                 </div>
             </div>
+
+            <div class="cache-box box">
+                <div class="minimize-box" onclick="HideCacheBox()">
+                    <hr class="minimize">
+                </div>
+                <textarea class="cache-txt txt" placeholder="The cache gets deleted when the tab is closed." onclick="this.focus();"></textarea>
+            </div>
         </section>
 
         <footer>
             {% include "footer.html" %}
+
+            <!--Cache box move-->
+            <script src="{{ url_for('static', filename='js/move-cache.js') }}"></script>
 
             <!--Dashboard js-->
             <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
