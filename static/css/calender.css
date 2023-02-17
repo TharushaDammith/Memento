@@ -148,3 +148,18 @@
         font-size: 1.1rem;
     }
 }
+
+
+.dark-bg {
+    background-color: rgb(48, 56, 65);
+    color: white !important;
+}
+
+.dark-box {
+    background-color: rgb(58, 71, 80);
+}
+
+.color-white {
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
