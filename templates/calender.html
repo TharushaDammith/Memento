@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include "header.html" %}
+
+        <!--Calender css-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/calender.css') }}">
+
+        <!--Navbar css-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-loggedin.css') }}">
+    </head>
+    <body>
+        {% include "navbar-loggedin.html" %}
+
+        <section id="Calender">
+            <div class="overlay" onclick="CloseSchedule(this)"></div>
+
+            <p class="month">January</p>
+
+            <div class="month-box">
+                {% for i in range(4): %}
+                <div class="week-box">
+                    {% for n in range(7): %}
+                    <div class="date" onclick="OpenSchedule(this)" data-value="https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com"></div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="event-box">
+                <p class="event-date">02 Feb 2023</p>
+                <ul class="event-list">
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            {% include "footer.html" %}
+
+            <!--Calender js-->
+            <script src="{{ url_for('static', filename='js/calender.js') }}"></script>
+
+            <!--Navbar js-->
+            <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+
+            <!--Navbar dropdown js-->
+            <script src="{{ url_for('static', filename='js/navbar-loggedin.js') }}"></script>
+        </footer>
+    </body>
+</html>

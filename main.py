@@ -42,7 +42,7 @@ def notes():
 
 @app.route("/calender")
 def calender():
-    return "calender"
+    return render_template("calender.html")
 
 
 @app.route("/log_out")
