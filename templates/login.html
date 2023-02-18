@@ -25,17 +25,31 @@
                 <div class="square sqr11"></div>
             </div>
 
-            <form class="auth-box">
+            <form class="auth-box" action="{{ url_for('login') }}" method="POST">
                 <p class="auth-title">Log in</p>
 
-                <label class="auth-label">Email</label>
+                <div>
+                    {% with message = get_flashed_messages() %}
+                        {% if message %}
+                            <p class="error">{{ message[0]}}</p>
+                        {% endif %}
+                    {% endwith %}
+                    <label class="auth-label">Email</label>
+                </div>
                 <div class="input-box">
-                    <input class="auth-input" type="email" placeholder="frankcastle@punisher.r">
+                    <input class="auth-input" name="email" type="email" placeholder="frankcastle@punisher.r" required>
                 </div>
 
-                <label class="auth-label">Password</label>
+                <div>
+                    {% with message = get_flashed_messages() %}
+                        {% if message %}
+                        <p class="error">{{ message[1] }}</p>
+                        {% endif %}
+                    {% endwith %}
+                    <label class="auth-label">Password</label>
+                </div>
                 <div class="input-box">
-                    <input class="auth-input password" type="password">
+                    <input class="auth-input password" name="password" type="password" required>
                     <i class="bi bi-eye-fill"></i>
                     <i class="bi bi-eye-slash-fill"></i>
                 </div>

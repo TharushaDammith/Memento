@@ -5,11 +5,20 @@
 
         <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 
-        <!--Navbar css-->
+        {% if current_user.is_authenticated %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-loggedin.css') }}">
+        {% else %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-initial.css') }}">
+        {% endif %}
+
+        <!--Navbar css-->
     </head>
     <body>
+        {% if current_user.is_authenticated %}
         {% include "navbar-loggedin.html" %}
+        {% else %}
+        {% include "navbar-initial.html" %}
+        {% endif %}
 
         <section id="Dashboard" class="const-height">
             <div class="side-menu" onclick="Sidebar()">
@@ -158,8 +167,10 @@
             <!--Navbar js-->
             <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 
+            {% if current_user.is_authenticated %}
             <!--Navbar dropdown js-->
             <script src="{{ url_for('static', filename='js/navbar-loggedin.js') }}"></script>
+            {% endif %}
         </footer>
     </body>
 </html>
