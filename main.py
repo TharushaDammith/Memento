@@ -1,11 +1,12 @@
+from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_user, login_required, UserMixin, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
-import random
 from send_mail import SendMail
 from sqlalchemy.exc import IntegrityError
 from string import ascii_lowercase
 from werkzeug.security import generate_password_hash, check_password_hash
+import random
 
 
 def generate_verification_key(user):
@@ -151,7 +152,7 @@ def verify_email():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", today=datetime.now().strftime("%Y-%m-%d"))
 
 
 @app.route("/settings")
@@ -163,7 +164,7 @@ def settings():
 @app.route("/notes")
 @login_required
 def notes():
-    return render_template("notes.html")
+    return render_template("images.html")
 
 
 @app.route("/calender")

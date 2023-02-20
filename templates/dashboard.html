@@ -15,12 +15,12 @@
     </head>
     <body>
         {% if current_user.is_authenticated %}
-        {% include "navbar-loggedin.html" %}
+            {% include "navbar-loggedin.html" %}
         {% else %}
-        {% include "navbar-initial.html" %}
+            {% include "navbar-initial.html" %}
         {% endif %}
 
-        <section id="Dashboard" class="const-height">
+        <section id="Dashboard" class="const-height bg">
             <div class="side-menu" onclick="Sidebar()">
                 <hr class="side-hr">
                 <hr class="side-hr">
@@ -61,7 +61,7 @@
                         </div></div>
                     <ul class="note-list">
                         <li class="note-item note-link box" onclick="RedirectToNote()">
-                            <p class="item-text txt">Open</p>
+                            <p class="item-text txt">New image</p>
                         </li>
                         <li class="note-item note-delete box" onclick="DeleteMenu(this)">
                             <p class="item-text txt">Delete</p>
@@ -69,10 +69,14 @@
                     </ul>
                 </div>
                 <div class="note-content box">
-                    <textarea class="note-text txt" autofocus>Write here...</textarea>
+                    <textarea class="note-text txt" name="description" autofocus>Write here...</textarea>
                     <div class="note-options">
-                        <div class="date">02-02-2023</div>
+                        <div class="date-box">
+                            <div class="date-clone" data-value="{{ today }}"></div>
+                            <input class="date" type="date">
+                        </div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
+                        <input class="checkmark-input" name="checkmark">
                     </div>
                 </div>
             </div>
@@ -104,10 +108,14 @@
                         </li>
                     </ul>
                 <div class="note-content box">
-                    <textarea class="note-text txt" autofocus>Write here...</textarea>
+                    <textarea class="note-text txt" name="description" autofocus>Write here...</textarea>
                     <div class="note-options">
-                        <div class="date">02-02-2023</div>
+                        <div class="date-box">
+                            <div class="date-clone" data-value="3;7"></div>
+                            <input class="date" name="date" type="date">
+                        </div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
+                        <input class="checkmark-input" name="checkmark">
                     </div>
                 </div>
             </div>
@@ -139,10 +147,14 @@
                     </ul>
                 </div>
                 <div class="note-content box">
-                    <textarea class="note-text txt" autofocus>Write here...</textarea>
+                    <textarea class="note-text txt" name="description" autofocus>Write here...</textarea>
                     <div class="note-options">
-                        <div class="date">02-02-2023</div>
+                        <div class="date-box">
+                            <div class="date-clone"></div>
+                            <input class="date" type="date">
+                        </div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
+                        <input class="checkmark-input" name="checkmark">
                     </div>
                 </div>
             </div>
@@ -154,6 +166,14 @@
                 <textarea class="cache-txt txt" placeholder="The cache gets deleted when the tab is closed." onclick="this.focus();"></textarea>
             </div>
         </section>
+
+        <form class="save-box bg" action="{{ url_for('dashboard') }}" method="POST">
+            {% if current_user.is_authenticated %}
+            <button class="save" type="submit">Save</button>
+            {% else %}
+            <a class="save" href="{{ url_for('login') }}" target="_blank">Save</a>
+            {% endif %}
+        </form>
 
         <footer>
             {% include "footer.html" %}

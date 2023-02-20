@@ -3,18 +3,21 @@
     <head>
         {% include "header.html" %}
 
-        <!--navbar-loggedin is the navigation bar of the user IS logged in-->
-<!--        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-loggedin.css') }}">-->
-
-        <!--navbar-initial is the navigation bar if the user ISN'T logged in-->
+        {% if current_user.is_authenticated %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-loggedin.css') }}">
+        {% else %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar-initial.css') }}">
+        {% endif %}
 
         <!--About css-->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
     </head>
     <body>
-        {% include "navbar-initial.html" %}
-<!--        {% include "navbar-loggedin.html" %}-->
+        {% if current_user.is_authenticated %}
+            {% include "navbar-loggedin.html" %}
+        {% else %}
+            {% include "navbar-initial.html" %}
+        {% endif %}
 
         <section id="AboutMe">
             <p class="about-heading">About</p>
@@ -39,8 +42,9 @@
             <!--Navbar js-->
             <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
 
-            <!--Navbar dropdown js-->
-<!--            <script src="{{ url_for('static', filename='js/navbar-loggedin.js') }}"></script>-->
+            {% if current_user.is_authenticated %}
+            <script src="{{ url_for('static', filename='js/navbar-loggedin.js') }}"></script>
+            {% endif %}
         </footer>
     </body>
 </html>

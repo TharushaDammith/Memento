@@ -32,8 +32,12 @@ var note_boiler_light = `<div class="note">
     <div class="note-content box">
         <textarea class="note-text txt">Write here...</textarea>
         <div class="note-options">
-            <div class="date">02-02-2023</div>
+            <div class="date-box">
+                <div class="date-clone"></div>
+                <input class="date" type="date">
+            </div>
             <img class="checkmark" src="static/icons/correct.png" onclick="MarkAsChecked(this)">
+            <input class="checkmark-input" name="checkmark">
         </div>
     </div>
 </div>`
@@ -67,8 +71,12 @@ var note_boiler_dark = `<div class="note">
     <div class="note-content box dark-box">
         <textarea class="note-text txt color-white">Write here...</textarea>
         <div class="note-options">
-            <div class="date">02-02-2023</div>
+            <div class="date-box">
+                <div class="date-clone"></div>
+                <input class="date" type="date">
+            </div>
             <img class="checkmark" src="static/icons/correct.png" onclick="MarkAsChecked(this)">
+            <input class="checkmark-input" name="checkmark">
         </div>
     </div>
 </div>`
@@ -83,6 +91,11 @@ var note_boiler_dark = `<div class="note">
     }
 
     FixHeight();
+
+    last_input = Array.from(document.querySelectorAll('.date')).at(-1);
+    last_div = Array.from(document.querySelectorAll('.date-clone')).at(-1);
+
+    InitDate(last_input, last_div);
 }
 
 var create_btn = document.querySelectorAll('.create');
@@ -123,14 +136,19 @@ function DeleteMenu(elem) {
 // CHECKMARK
 
 function MarkAsChecked(elem) {
+    all_checkmarks = Array.from(document.querySelectorAll('.checkmark'));
+    index = all_checkmarks.indexOf(elem)
+    check_input = document.querySelectorAll('.checkmark-input')[index];
+
     if (elem.src.split('/').at(-1) == 'correct.png') {
         elem.src = "static/icons/correct-clicked.png";
+        check_input.value = "True";
     }
     else {
         elem.src = 'static/icons/correct.png';
+        check_input.value = "False";
     }
 }
-
 
 
 // DASHBOARD HEIGHT
@@ -195,22 +213,32 @@ function HideCacheBox() {
 var light = document.querySelector('.light');
 var dark = document.querySelector('.dark');
 
-dark.addEventListener('click', () => {
-    DarkMode();
-});
+try {
+    dark.addEventListener('click', () => {
+        DarkMode();
+    });
 
-light.addEventListener('click', () => {
-    LightMode();
-});
+    light.addEventListener('click', () => {
+        LightMode();
+    });
+}
+catch {
+    //pass
+}
+
+
 
 function DarkMode() {
-    var dashboard = document.querySelector('#Dashboard');
+    var bg = document.querySelectorAll('.bg');
     var hr = document.querySelectorAll('hr');
     var sidebar = document.querySelector('.sidebar');
     var txt = document.querySelectorAll('.txt');
     var box = document.querySelectorAll('.box');
 
-    dashboard.classList.add('dark-bg');
+    bg.forEach((item) => {
+        item.classList.add('dark-bg');
+    });
+
     sidebar.classList.add('dark-sidebar');
 
     hr.forEach((item) => {
@@ -227,13 +255,16 @@ function DarkMode() {
 }
 
 function LightMode() {
-    var dashboard = document.querySelector('#Dashboard');
+    var bg = document.querySelectorAll('.bg');
     var hr = document.querySelectorAll('hr');
     var sidebar = document.querySelector('.sidebar');
     var txt = document.querySelectorAll('.txt');
     var box = document.querySelectorAll('.box');
 
-    dashboard.classList.remove('dark-bg');
+    bg.forEach((item) => {
+        item.classList.remove('dark-bg');
+    });
+
     sidebar.classList.remove('dark-sidebar');
 
     hr.forEach((item) => {
@@ -256,4 +287,47 @@ function LightMode() {
 function RedirectToNote() {
     goto_url = window.location.href.replace("dashboard", "notes");
     window.location.replace(goto_url);
+}
+
+
+// Date Selector
+
+var today = document.querySelector('.date-clone').getAttribute('data-value');
+const red = "rgb(238, 87, 87)";
+const yellow = "rgb(238, 223, 87)";
+const green = "rgb(113, 191, 135)";
+
+
+date_clone = document.querySelectorAll('.date-clone');
+date = document.querySelectorAll('.date');
+
+for (i=0; i<date.length; i++) {
+    InitDate(date[i], date_clone[i]);
+}
+
+function InitDate(date_input, display_div) {
+    display_div.innerHTML = today;
+
+    date_input.addEventListener('input', () => {
+        display_div.innerHTML = date_input.value;
+        PickColor(display_div);
+    });
+}
+
+function PickColor(elem) {
+    limits = document.querySelectorAll('.date-clone')[1].getAttribute('data-value').split(';').map(Number);
+
+    current_date = Number(today.split('-').join(''));
+    exp_date = Number(elem.textContent.split('-').join(''));
+    diff = exp_date - current_date;
+
+    if (diff <= limits[0]) {
+        elem.style.backgroundColor = red;
+    }
+    else if (diff < limits[1]) {
+        elem.style.backgroundColor = yellow;
+    }
+    else {
+        elem.style.backgroundColor = green;
+    }
 }
