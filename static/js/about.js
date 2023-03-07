@@ -24,3 +24,10 @@ try {
 catch(err) {
     //pass
 }
+
+settings_mode = document.querySelector("#Mode");
+if (settings_mode.value == "Dark") {
+    dark_mode.click();
+    dark_mode.style.display = "none";
+    light_mode.style.display = "block";
+}

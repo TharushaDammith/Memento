@@ -1,3 +1,12 @@
+// Change Image
+
+note_id = Number(document.querySelector('#NoteId').value);
+img_link = document.querySelector('#ImgLink').value;
+if (note_id) {
+    note_img = document.querySelectorAll('.note-img');
+    note_img[note_id-1].style.backgroundImage = `url('${img_link}')`;
+}
+
 // CREATE NOTE
 
 function createElement() {
@@ -22,8 +31,8 @@ var note_boiler_light = `<div class="note">
             </div></div>
     </div>
         <ul class="note-list">
-            <li class="note-item note-link box" onclick="RedirectToNote()">
-                <p class="item-text txt">Open</p>
+            <li class="note-item note-link box" onclick="RedirectToImages()">
+                <p class="item-text txt">New image</p>
             </li>
             <li class="note-item note-delete box" onclick="DeleteMenu(this)">
                 <p class="item-text txt">Delete</p>
@@ -61,8 +70,8 @@ var note_boiler_dark = `<div class="note">
             </div></div>
     </div>
         <ul class="note-list">
-            <li class="note-item note-link box dark-box" onclick="RedirectToNote()">
-                <p class="item-text txt color-white">Open</p>
+            <li class="note-item note-link box dark-box" onclick="RedirectToImages()">
+                <p class="item-text txt color-white">New image</p>
             </li>
             <li class="note-item note-delete box dark-box" onclick="DeleteMenu(this)">
                 <p class="item-text txt color-white">Delete</p>
@@ -152,10 +161,14 @@ function MarkAsChecked(elem) {
 
 
 // DASHBOARD HEIGHT
-
 function FixHeight() {
+    note_num = document.querySelectorAll('.note').length;
     dashboard = document.querySelector('#Dashboard').style;
     note_length = document.querySelectorAll('.note').length;
+
+    if (note_num > 3) {
+        dashboard.height = 'initial';
+    }
 
     if (window.innerWidth > 850) {
         if (note_length >= 4) {
@@ -174,17 +187,15 @@ function FixHeight() {
         }
     }
     else {
-        console.log(1);
         if (note_length >= 3) {
             dashboard.height = "initial";
         }
         else {
-            console.log(2);
             dashboard.height = 'calc(100vh - 91px - 6rem)';
         }
     }
 }
-
+FixHeight()
 
 // OPEN/CLOSE SIDEBAR
 
@@ -284,29 +295,41 @@ function LightMode() {
 
 // Redirect Url
 
-function RedirectToNote() {
-    goto_url = window.location.href.replace("dashboard", "notes");
+function RedirectToImages(elem) {
+    link_list = Array.from(document.querySelectorAll('.note-link'));
+    item_num = link_list.indexOf(elem) + 1;
+
+    goto_url = `${window.location.href.split('/')[0]}select-image?note_id=${item_num}`;
     window.location.replace(goto_url);
 }
 
 
 // Date Selector
 
-var today = document.querySelector('.date-clone').getAttribute('data-value');
+var now = new Date();
+var dd = String(now.getDate()).padStart(2, '0');
+var mm = String(now.getMonth() + 1).padStart(2, '0');
+var yyyy = now.getFullYear();
+var today = `${yyyy}-${mm}-${dd}`;
 const red = "rgb(238, 87, 87)";
 const yellow = "rgb(238, 223, 87)";
 const green = "rgb(113, 191, 135)";
 
-
-date_clone = document.querySelectorAll('.date-clone');
-date = document.querySelectorAll('.date');
-
-for (i=0; i<date.length; i++) {
-    InitDate(date[i], date_clone[i]);
+try {
+    date_clone = document.querySelectorAll('.date-label');
+    date = document.querySelectorAll('.date');
+    for (i=0; i<date.length; i++) {
+        InitDate(date[i], date_clone[i]);
+    }
+}
+catch {
+    //pass
 }
 
-function InitDate(date_input, display_div) {
-    display_div.innerHTML = today;
+function InitDate(date_input, display_div, init_load=false) {
+    if (!init_load) {
+        display_div.innerHTML = today;
+    }
 
     date_input.addEventListener('input', () => {
         display_div.innerHTML = date_input.value;
@@ -314,8 +337,15 @@ function InitDate(date_input, display_div) {
     });
 }
 
+// InitDate in all existing notes
+date_input = document.querySelectorAll('.date');
+display_div = document.querySelectorAll('.date-clone');
+for (i=0; i<date_input.length; i++) {
+    InitDate(date_input[i], display_div[i], true);
+}
+
 function PickColor(elem) {
-    limits = document.querySelectorAll('.date-clone')[1].getAttribute('data-value').split(';').map(Number);
+    limits = document.querySelector('#Limits').textContent.split(';').map(Number);
 
     current_date = Number(today.split('-').join(''));
     exp_date = Number(elem.textContent.split('-').join(''));
@@ -330,4 +360,56 @@ function PickColor(elem) {
     else {
         elem.style.backgroundColor = green;
     }
+}
+
+all_dates = document.querySelectorAll('.date-clone');
+all_dates.forEach((item) => {
+    PickColor(item)
+});
+
+// Save Data
+
+function Save() {
+    txt_list = [];
+    img_links = [];
+    chk_list = [];
+    date_list = [];
+
+    document.querySelectorAll('.note-text').forEach((item) => {
+        txt_list.push(item.value);
+    });
+
+    document.querySelectorAll('.note-img').forEach((item) => {
+        img = item.currentStyle || window.getComputedStyle(item, false),
+        img_links.push(img.backgroundImage.split('"').at(1));
+    });
+
+    document.querySelectorAll('.checkmark').forEach((item) => {
+        chk_list.push(item.src);
+    });
+
+    document.querySelectorAll('.date-clone').forEach((item) => {
+        date_list.push(item.textContent);
+    });
+
+    document.querySelector('#Data').value = `${txt_list.join('~')}]${img_links.join('~')}]${chk_list.join('~')}]${date_list.join('~')}]`;
+    document.querySelector('#RealBtn').click();
+}
+
+
+// Page unload alert
+
+window.addEventListener('beforeunload', (e) => {
+    e.preventDefault();
+    e.returnValue = '';
+});
+
+
+// Change Mode per settings
+
+settings_mode = document.querySelector("#Mode");
+if (settings_mode.value == "Dark") {
+    DarkMode();
+    document.querySelector('.dark').style.display = "none";
+    document.querySelector('.light').style.display = "block";
 }

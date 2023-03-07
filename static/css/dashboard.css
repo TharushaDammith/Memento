@@ -160,7 +160,7 @@ textarea {
 }
 
 .note-img {
-    background-image: url('/static/images/bridge.jpg');
+    background-image: url('/static/images/pc.jpg');
     background-position: 0 50%;
     background-size: cover;
     border-radius: 12px 12px 0 0;
@@ -322,6 +322,10 @@ textarea {
 }
 .save:active {
     background-color: rgb(26, 106, 170);
+}
+
+.save-btn {
+    display: none;
 }
 
 .dark-bg {

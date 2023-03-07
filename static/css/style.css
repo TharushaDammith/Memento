@@ -2,6 +2,10 @@
     transition: font-size 1s;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: "Nunito", sans-serif;
     background-color: rgb(243, 243, 243);
@@ -66,9 +70,12 @@ footer {
 }
 
 .credit-link {
-    border-bottom: 1px solid rgba(255, 255, 255, .8);
     padding-bottom: .1rem;
     position: relative;
+}
+
+.credit-link > a {
+    border-bottom: 1px solid rgba(255, 255, 255, .8);
 }
 
 .copyright {

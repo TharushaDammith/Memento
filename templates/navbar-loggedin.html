@@ -3,7 +3,11 @@
 
     <ul class="user-list">
         <li class="nav-item">
-            <a class="nav-link create hide-in-mobile non-draggable" href="#">Create</a>
+            {% if posts %}
+            <a class="nav-link create hide-in-mobile non-draggable">Create</a>
+            {% else %}
+            <a class="nav-link create hide-in-mobile non-draggable" href="{{ url_for('dashboard') }}" target="_blank">Create</a>
+            {% endif %}
         </li>
 
         <li class="nav-item dark mode item-margin-desktop">
@@ -15,7 +19,11 @@
         </li>
 
         <li class="nav-item drop-down item-margin-mobile">
-            <div class="user-menu">AN</div>
+            {% if current_user.is_authenticated %}
+                <div class="user-menu">{{ current_user.name[:2] }}</div>
+            {% else %}
+                <div class="user-menu">AN</div>
+            {% endif %}
             <ul class="menu-data">
                 <li class="menu-item" onclick="RedirectTo('dashboard')">
                     <a class="menu-link">Dashboard</a>
@@ -45,7 +53,7 @@
 
     <ul class="nav-list">
         <li class="create-box">
-            <a class="create non-draggable" href="#">Create</a>
+            <a class="create non-draggable">Create</a>
         </li>
     </ul>
 </nav>

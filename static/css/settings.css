@@ -1,5 +1,17 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 #Settings {
     padding: 2rem 3rem;
     transition: padding 1s;
@@ -169,7 +181,6 @@
 .dark-theme {
     background-color: rgb(58, 71, 80);
     color: white;
-    display: none;
 }
 
 .checkbox {
@@ -212,7 +223,7 @@
 
 .date-limit {
     height: 1rem;
-    width: 1rem;
+    width: 1.5rem;
     padding-bottom: .2rem;
     padding-left: .25rem;
 }
@@ -263,10 +274,6 @@
 }
 .delete:active {
     background-color: rgb(132, 12, 12);
-}
-
-.delete-btn {
-    display: none;
 }
 
 @media (max-width: 500px) {

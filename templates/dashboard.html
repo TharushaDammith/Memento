@@ -20,7 +20,13 @@
             {% include "navbar-initial.html" %}
         {% endif %}
 
+        <input id="Mode" type="hidden" value="{{ theme }}">
+
         <section id="Dashboard" class="const-height bg">
+            <input type="hidden" id="NoteId" value="{{ note_id }}">
+            <input type="hidden" id="ImgLink" value="{{ img_link }}">
+
+            <div style="display: none" id="Limits">3;7</div>
             <div class="side-menu" onclick="Sidebar()">
                 <hr class="side-hr">
                 <hr class="side-hr">
@@ -32,7 +38,7 @@
                         <a class="side-link txt" href="{{ url_for('settings') }}">Settings</a>
                     </li>
                     <li class="side-item">
-                        <a class="side-link txt">Calender</a>
+                        <a class="side-link txt" href="{{ url_for('calender') }}">Calender</a>
                     </li>
                     <li class="side-item">
                         <a class="side-link active txt" href="{{ url_for('dashboard') }}">Dashboard</a>
@@ -42,9 +48,11 @@
                 <p class="username">Frank Castle</p>
             </div>
 
+            {% if posts == 'no_posts' %}
             <div class="note">
                 <div class="note-img">
-                    <div class="note-menu" onclick="OpenMenu(this)"><div class="dot-row">
+                    <div class="note-menu" onclick="OpenMenu(this)">
+                        <div class="dot-row">
                             <div class="dot"></div>
                             <div class="dot"></div>
                             <div class="dot"></div>
@@ -58,9 +66,10 @@
                             <div class="dot"></div>
                             <div class="dot"></div>
                             <div class="dot"></div>
-                        </div></div>
+                        </div>
+                    </div>
                     <ul class="note-list">
-                        <li class="note-item note-link box" onclick="RedirectToNote()">
+                        <li class="note-item note-link box" onclick="RedirectToImages(this)">
                             <p class="item-text txt">New image</p>
                         </li>
                         <li class="note-item note-delete box" onclick="DeleteMenu(this)">
@@ -72,7 +81,7 @@
                     <textarea class="note-text txt" name="description" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date-box">
-                            <div class="date-clone" data-value="{{ today }}"></div>
+                            <div class="date-clone date-label"></div>
                             <input class="date" type="date">
                         </div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
@@ -83,7 +92,8 @@
 
             <div class="note">
                 <div class="note-img">
-                    <div class="note-menu" onclick="OpenMenu(this)">                        <div class="dot-row">
+                    <div class="note-menu" onclick="OpenMenu(this)">
+                        <div class="dot-row">
                             <div class="dot"></div>
                             <div class="dot"></div>
                             <div class="dot"></div>
@@ -100,8 +110,8 @@
                         </div></div>
                 </div>
                     <ul class="note-list">
-                        <li class="note-item note-link box" onclick="RedirectToNote()">
-                            <p class="item-text txt">Open</p>
+                        <li class="note-item note-link box" onclick="RedirectToImages(this)">
+                            <p class="item-text txt">New image</p>
                         </li>
                         <li class="note-item note-delete box" onclick="DeleteMenu(this)">
                             <p class="item-text txt">Delete</p>
@@ -111,7 +121,7 @@
                     <textarea class="note-text txt" name="description" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date-box">
-                            <div class="date-clone" data-value="3;7"></div>
+                            <div class="date-clone date-label"></div>
                             <input class="date" name="date" type="date">
                         </div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
@@ -138,8 +148,8 @@
                             <div class="dot"></div>
                         </div></div>
                     <ul class="note-list">
-                        <li class="note-item note-link box" onclick="RedirectToNote()">
-                            <p class="item-text txt">Open</p>
+                        <li class="note-item note-link box" onclick="RedirectToImages(this)">
+                            <p class="item-text txt">New image</p>
                         </li>
                         <li class="note-item note-delete box" onclick="DeleteMenu(this)">
                             <p class="item-text txt">Delete</p>
@@ -150,7 +160,7 @@
                     <textarea class="note-text txt" name="description" autofocus>Write here...</textarea>
                     <div class="note-options">
                         <div class="date-box">
-                            <div class="date-clone"></div>
+                            <div class="date-clone date-label"></div>
                             <input class="date" type="date">
                         </div>
                         <img class="checkmark" src="{{ url_for('static', filename='icons/correct.png') }}" onclick="MarkAsChecked(this)">
@@ -158,6 +168,48 @@
                     </div>
                 </div>
             </div>
+            {% else %}
+            {% for post in posts %}
+            <div class="note">
+                <div style="background-image: url('{{ post.image }}')" class="note-img">
+                    <div class="note-menu" onclick="OpenMenu(this)"><div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row middle-dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div>
+                        <div class="dot-row">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                        </div></div>
+                    <ul class="note-list">
+                        <li class="note-item note-link box" onclick="RedirectToImages(this)">
+                            <p class="item-text txt">New image</p>
+                        </li>
+                        <li class="note-item note-delete box" onclick="DeleteMenu(this)">
+                            <p class="item-text txt">Delete</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="note-content box">
+                    <textarea class="note-text txt" name="description" autofocus>{{ post.text }}</textarea>
+                    <div class="note-options">
+                        <div class="date-box">
+                            <div class="date-clone">{{ post.expiry_date }}</div>
+                            <input class="date" type="date">
+                        </div>
+                        <img class="checkmark" src="{{ post.check }}" onclick="MarkAsChecked(this)">
+                        <input class="checkmark-input" name="checkmark">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
 
             <div class="cache-box box">
                 <div class="minimize-box" onclick="HideCacheBox()">
@@ -169,10 +221,13 @@
 
         <form class="save-box bg" action="{{ url_for('dashboard') }}" method="POST">
             {% if current_user.is_authenticated %}
-            <button class="save" type="submit">Save</button>
+            <button id="RealBtn" class="save-btn" type="submit">Save</button>
+            <a class="save" onclick="Save()">Save</a>
             {% else %}
             <a class="save" href="{{ url_for('login') }}" target="_blank">Save</a>
             {% endif %}
+
+            <input id="Data" class="save-btn" type="password" name="data">
         </form>
 
         <footer>

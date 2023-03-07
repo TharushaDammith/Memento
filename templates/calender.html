@@ -12,16 +12,24 @@
     <body>
         {% include "navbar-loggedin.html" %}
 
+        <input id="Mode" type="hidden" value="{{ theme }}">
+        <input id="Tasks" type="hidden" value="{{ tasks }}">
+        <input id="Limits" type="hidden" value="{{ lim }}">
+
         <section id="Calender">
             <div class="overlay" onclick="CloseSchedule(this)"></div>
 
-            <p class="month">January</p>
+            <div class="month-toggle">
+                <i class="bi bi-caret-left-fill" onclick="PreviousMonth()"></i>
+                <p class="month"></p>
+                <i class="bi bi-caret-right-fill" onclick="NextMonth()"></i>
+            </div>
 
             <div class="month-box">
                 {% for i in range(4): %}
                 <div class="week-box">
                     {% for n in range(7): %}
-                    <div class="date box" onclick="OpenSchedule(this)" data-value="https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com;https://stackoverflow.com"></div>
+                    <div class="date box" onclick="OpenSchedule(this)" data-value="No tasks on this day."></div>
                     {% endfor %}
                 </div>
                 {% endfor %}

@@ -2,8 +2,8 @@
     <a class="nav-brand" href="{{ url_for('home') }}">Memento</a>
 
     <ul class="nav-list">
-        <li class="nav-item create">
-            <a class="nav-link non-draggable" href="#">Create</a>
+        <li class="nav-item create" onclick="RedirectTo('dashboard')">
+            <a class="nav-link non-draggable" href="{{ url_for('dashboard') }}" target="_blank">Create</a>
         </li>
 
         <li class="nav-item item-margin">
