@@ -389,9 +389,12 @@ def calender():
 
     for post in post_list:
         posts_on_date = Post.query.filter_by(expiry_date=post.expiry_date).all()
-        posts_on_date = [not_checked for not_checked in posts_on_date if not_checked.check != "http://127.0.0.1:5000" \
-                                                                                              "/static/icons/correct-clicked.png"]
-        if post.check == "http://127.0.0.1:5000/static/icons/correct-clicked.png":
+        posts_on_date = [not_checked for not_checked in posts_on_date if not_checked.check != f"{request.url_root}"
+                                                                                              "static/icons/correct"
+                                                                                              "-clicked.png"]
+        print(f"{request.url_root}static/icons/correct-clicked.png")
+        print(post.check)
+        if post.check == f"{request.url_root}static/icons/correct-clicked.png":
             continue
         tasks[f"{post.expiry_date}"] = [f"{p.text[:25]}..." for p in posts_on_date]
 
