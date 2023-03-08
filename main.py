@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from string import ascii_lowercase
 from unsplash import Unsplash
 from werkzeug.security import generate_password_hash, check_password_hash
-import json
+import os
 import random
 
 
@@ -41,7 +41,7 @@ def shape_data(list_1d: list):
 app = Flask(__name__)
 db = SQLAlchemy()
 app.config["SECRET_KEY"] = "ErjtrKRJEewewLke"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 db.init_app(app)
 
 login_manager = LoginManager()
@@ -83,7 +83,7 @@ class Post(db.Model):
     image = db.Column(db.String(500), nullable=True)
     text = db.Column(db.String(500), nullable=False)
     check = db.Column(db.String(100), nullable=False)
-    expiry_date = db.Column(db.Integer, nullable=False)
+    expiry_date = db.Column(db.String(100), nullable=False)
 
 
 with app.app_context():
@@ -103,7 +103,7 @@ def home():
 @app.route("/about")
 def about():
     if current_user.is_authenticated:
-        data = Settings.query.get(current_user.id)
+        data = Settings.query.filter_by(user_id=current_user.id).first()
         theme = data.theme
     else:
         theme = None
@@ -232,7 +232,7 @@ def dashboard():
         if not posts:
             posts = "no_posts"
 
-        data = Settings.query.get(current_user.id)
+        data = Settings.query.filter_by(user_id=current_user.id).first()
         theme = data.theme
     return render_template("dashboard.html",
                            posts=posts,
@@ -250,7 +250,7 @@ def settings():
             max_lim = request.form["max-lim"]
             theme = request.form["theme"]
 
-            new_settings = Settings.query.get(current_user.id)
+            new_settings = Settings.query.filter_by(user_id=current_user.id).first()
 
             new_settings.top_lim = max_lim
             new_settings.bottom_lim = min_lim
@@ -284,8 +284,15 @@ def settings():
                 db.session.commit()
 
             if email != current_user.email:
-                current_user.email = email
-                db.session.commit()
+
+                try:
+                    current_user.email = email
+                    db.session.commit()
+                except IntegrityError:
+                    flash("")
+                    flash("*This email already exists.")
+
+                    return redirect(url_for('settings'))
 
                 verify = VerifyEmail.query.filter_by(user_id=current_user.id).first()
                 db.session.delete(verify)
@@ -311,7 +318,7 @@ def settings():
     name = current_user.name
     email = current_user.email
 
-    data = Settings.query.get(current_user.id)
+    data = Settings.query.filter_by(user_id=current_user.id).first()
     default_limits = [data.bottom_lim, data.top_lim]
     verify = VerifyEmail.query.filter_by(user_id=current_user.id).first()
 
@@ -332,7 +339,7 @@ def select_image():
             query = request.form["search"]
             data = shape_data(unsplash.search_image(query))
 
-            user_settings = Settings.query.get(current_user.id)
+            user_settings = Settings.query.filter_by(user_id=current_user.id).first()
 
             return render_template("images.html", image_links=data,
                                    populate_search=query,
@@ -342,7 +349,7 @@ def select_image():
             query = request.form["load-more"]
             item_limit = request.form["item-limit"]
             data = shape_data(unsplash.search_image(query, item_limit=item_limit))
-            user_settings = Settings.query.get(current_user.id)
+            user_settings = Settings.query.filter_by(user_id=current_user.id).first()
 
             return render_template("images.html",
                                    image_links=data,
@@ -350,7 +357,7 @@ def select_image():
                                    id=request.args["note_id"],
                                    theme=user_settings.theme)
         else:
-            user_settings = Settings.query.get(current_user.id)
+            user_settings = Settings.query.filter_by(user_id=current_user.id).first()
 
             return redirect(url_for('dashboard',
                                     note_id=request.form["note-id"],
@@ -363,7 +370,7 @@ def select_image():
 
     data = shape_data(data)
 
-    user_settings = Settings.query.get(current_user.id)
+    user_settings = Settings.query.filter_by(user_id=current_user.id).first()
 
     return render_template("images.html",
                            image_links=data,
@@ -375,7 +382,7 @@ def select_image():
 @app.route("/calender")
 @login_required
 def calender():
-    data = Settings.query.get(current_user.id)
+    data = Settings.query.filter_by(user_id=current_user.id).first()
     post_list = Post.query.filter_by(user_id=current_user.id).all()
     user_settings = Settings.query.filter_by(user_id=current_user.id).first()
     tasks = {}
@@ -398,6 +405,11 @@ def calender():
 def log_out():
     logout_user()
     return redirect(url_for("login"))
+
+
+@app.errorhandler(401)
+def page_requires_login(e):
+    return render_template("401.html"), 401
 
 
 if __name__ == "__main__":

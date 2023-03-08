@@ -508,6 +508,7 @@ textarea {
 }
 .date-sqr:active {
     background-color: rgb(33, 133, 213);
+    color: white;
 }
 
 .red {

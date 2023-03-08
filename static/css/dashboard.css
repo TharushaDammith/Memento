@@ -45,7 +45,7 @@ textarea {
     background-color: rgb(217, 217, 217);
     font-family: "Montserrat Alternates", sans-serif;
     font-weight: 300;
-    height: 100%;
+    height: calc(100% + 70px);
     left: 0;
     overflow: hidden;
     position: absolute;

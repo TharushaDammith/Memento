@@ -49,9 +49,15 @@
                 <div class="user-item right-item">
                     <div class="error-box">
                         <label class="user-label email">Email</label>
-                        {% if not verify %}
-                        <p class="error">*Verify Email</p>
-                        {% endif %}
+                        {% with message = get_flashed_messages() %}
+                            {% if message %}
+                            <p class="error">{{ message[1] }}</p>
+                            {% endif %}
+
+                            {% if not verify and not message[1] %}
+                            <p class="error">*Verify Email</p>
+                            {% endif %}
+                        {% endwith %}
                     </div>
                     {% if not verify %}
                     <input id="Email" class="user-input input-error border" name="email" type="email" value="{{ email }}" required>

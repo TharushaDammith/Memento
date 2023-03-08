@@ -1,8 +1,3 @@
-var all_dates = document.querySelectorAll('.date');
-for (i=0; i<all_dates.length; i++) {
-    all_dates[i].innerHTML = i + 1;
-}
-
 function OpenSchedule(elem) {
     var dark_mode = document.querySelector('#Calender').className.includes('dark-bg');
     var link_list = elem.getAttribute('data-value').split(';');
@@ -90,6 +85,14 @@ light.addEventListener('click', () => {
 now = new Date();
 FillMonth(now.getMonth() + 1, now.getFullYear());
 
+var all_dates = document.querySelectorAll('.date');
+for (i=0; i<all_dates.length; i++) {
+    all_dates[i].innerHTML = i + 1;
+    if (i + 1 == now.getDate()) {
+        all_dates[i].classList.add('blue');
+    }
+}
+
 // Date functionality
 
 const today = new Date();
@@ -118,6 +121,14 @@ function ChangeMonth() {
 
     month_to = (today.getMonth() + current_pos) % 12;
     month_elem.innerHTML = month_list[month_to];
+
+    date_list = document.querySelectorAll('.date');
+    if (month_elem.innerHTML == month_list[now.getMonth()]) {
+        date_list[now.getDate() - 1].classList.add('blue');
+    }
+    else {
+        date_list[now.getDate() - 1].classList.remove('blue');
+    }
 
     FillMonth(month_to + 1, now.getFullYear());
     SetTaskToDate();
@@ -189,7 +200,6 @@ function SetTaskToDate() {
     date_list = document.querySelectorAll('.date');
     date_list.forEach((item) => {
         item.classList.remove('red');
-        item.classList.remove('blue');
         item.classList.remove('green');
         item.classList.remove('yellow');
     });
@@ -211,8 +221,6 @@ function SetTaskToDate() {
             tasks_json[date].forEach((item) => {
                 exp_date_elem.dataset.value += `${item};`;
             });
-
-            date_list[day-1].classList.add('blue');
 
             if (diff <= limit[0]) {
                 exp_date_elem.classList.add('red');

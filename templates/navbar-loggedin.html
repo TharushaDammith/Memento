@@ -53,7 +53,11 @@
 
     <ul class="nav-list">
         <li class="create-box">
+            {% if posts %}
             <a class="create non-draggable">Create</a>
+            {% else %}
+            <a class="create non-draggable" href="{{ url_for('dashboard') }}">Create</a>
+            {% endif %}
         </li>
     </ul>
 </nav>
