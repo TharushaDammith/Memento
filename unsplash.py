@@ -4,7 +4,7 @@ import os
 
 class Unsplash:
     def __init__(self):
-        self.access_key = os.environ.get("ACCESS_KEY")
+        self.access_key = os.environ.get("UNSPLASH_ACCESS_KEY")
         self.endpoint = "https://api.unsplash.com/search/photos"
         self.header = {"Authorization": f"Client-ID {self.access_key}"}
 
